@@ -33,6 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Shimmer.fromColors(
+                period: const Duration(milliseconds: 700), // Dauer der Shimmer-Wiederholung
                 baseColor: Colors.white,
                 highlightColor: const Color.fromRGBO(228, 132, 255, 0.724),
                 child: Text(

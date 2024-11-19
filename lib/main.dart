@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_beautiful_checklist_exercise/shared/database_repository.dart';
-import 'package:simple_beautiful_checklist_exercise/shared/mock_database.dart';
+import 'package:simple_beautiful_checklist_exercise/shared/shared_preferences_repository.dart';
+// import 'package:simple_beautiful_checklist_exercise/shared/shared_preferences_repository.dart';
 
 import 'features/splash/splash_screen.dart';
 import 'home_screen.dart';
@@ -10,8 +11,9 @@ void main() async {
   // Wird benötigt, um auf SharedPreferences zuzugreifen
   WidgetsFlutterBinding.ensureInitialized();
 
-  // TODO: Hier statt MockDatabase() ein SharedPreferencesRepository() verwenden.
-  final DatabaseRepository repository = MockDatabase();
+  // √ todo: Hier statt MockDatabase() ein SharedPreferencesRepository() verwenden.
+  // final DatabaseRepository repository = MockDatabase();
+  final DatabaseRepository repository = SharedPreferencesRepository();
 
   runApp(MainApp(repository: repository));
 }
@@ -39,6 +41,7 @@ class MainApp extends StatelessWidget {
         ),
       ),
       themeMode: ThemeMode.system,
+      //themeMode: ThemeMode.dark, // umgestellt auf "dark".
       title: 'Checklisten App',
       initialRoute: '/',
       routes: {

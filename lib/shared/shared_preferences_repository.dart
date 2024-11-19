@@ -1,15 +1,17 @@
 import 'dart:developer';
 
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_beautiful_checklist_exercise/shared/database_repository.dart';
 
-class MockDatabase implements DatabaseRepository {
+class SharedPreferencesRepository implements DatabaseRepository {
+  final SharedPreferencesAsync prefs = SharedPreferencesAsync();
   final List<String> _items = [];
 
   @override
   Future<int> get itemCount async {
     await Future.delayed(const Duration(milliseconds: 100));
     // Gibt die Anzahl der Items zurück.
-    log("0012_mock_database - itemCount: $_items");
+    log("0012_shared_preferences_repository - itemCount: $_items");
     return _items.length;
   }
 
@@ -17,8 +19,10 @@ class MockDatabase implements DatabaseRepository {
   Future<List<String>> getItems() async {
     // Gibt die Items zurück.
     await Future.delayed(const Duration(milliseconds: 100));
-    log("0020_mock_database - getItems: $_items");
+    log("0020_shared_preferences_repository - getItems: $_items");
+    await prefs.getStringList("tasks");
     return _items;
+    // return await prefs.getStringList("tasks")??[]; // Version aus der Vorlesung
   }
 
   @override
@@ -26,14 +30,15 @@ class MockDatabase implements DatabaseRepository {
     // Fügt ein neues Item hinzu.
     // make sure item doesn't exist yet and is not empty
     if (item.isNotEmpty && !_items.contains(item)) _items.add(item);
-    log("0027_mock_database - addItem(String item): $item");
+    log("0027_shared_preferences_repository - addItem(String item): $item");
   }
 
   @override
   Future<void> deleteItem(int index) async {
     // Löscht ein Item an einem bestimmten Index nach Klick auf die Mülltonne.
+    // TODO: AlertDialog einfügen
     _items.removeAt(index);
-    log("0033_mock_database - _items.removeAt(index): $index");
+    log("0040_shared_preferences_repository - _items.removeAt(index): $index");
   }
 
   @override
@@ -42,7 +47,12 @@ class MockDatabase implements DatabaseRepository {
     // make sure not empty and not same as other
     if (newItem.isNotEmpty && !_items.contains(newItem)) {
       _items[index] = newItem;
-      log("0041_mock_database - _items[index] = newItem = $newItem");
+      log("0041_shared_preferences_repository - _items[index] = newItem = $newItem");
     }
   }
+
+//   @override
+//   Future<void> _saveItem(int index, String item) async {
+// return
+//   }
 }

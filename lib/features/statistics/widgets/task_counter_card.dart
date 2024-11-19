@@ -20,30 +20,55 @@ class TaskCounterCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                padding: const EdgeInsets.all(16.0),
-                decoration: const BoxDecoration(
-                  color: Colors.purple,
-                  shape: BoxShape.circle,
-                ),
-                child: Text(
-                  "$taskCount",
-                  style: const TextStyle(
-                    fontSize: 36,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+              /*--- *** ---*/
+              const Text(
+                "Anzahl der offenen Tasks",
+                style: TextStyle(
+                  fontSize: 18,
                 ),
               ),
+
+              // Container(
+              //   padding: const EdgeInsets.all(16.0),
+              //   decoration: const BoxDecoration(
+              //     color: Colors.purple,
+              //     shape: BoxShape.circle,
+              //   ),
+              //   child: Text(
+              //     "$taskCount",
+              //     style: const TextStyle(
+              //       fontSize: 36,
+              //       color: Colors.white,
+              //       fontWeight: FontWeight.bold,
+              //     ),
+              //   ),
+              // ),
+              /*--- *** ---*/
               const SizedBox(width: 16),
-              const Expanded(
-                child: Text(
-                  "Anzahl der offenen Tasks",
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
+              /*--- *** ---*/
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: const BoxDecoration(
+                        color: Colors.purple,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Text(
+                        "$taskCount",
+                        style: const TextStyle(
+                          fontSize: 36,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
+              /*--- *** ---*/
             ],
           ),
         ),
