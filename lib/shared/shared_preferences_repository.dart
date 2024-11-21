@@ -17,14 +17,14 @@ class SharedPreferencesRepository implements DatabaseRepository {
   Future<void> saveItem(String item) async {
     // Speichert die Items.
     await prefs.setStringList("tasks", _items);
-    log("0019_shared_preferences_repository - _saveItem = $item");
+    log("0020_shared_preferences_repository - _saveItem = $item");
   }
 
   @override
   Future<int> get itemCount async {
     await Future.delayed(const Duration(milliseconds: 100));
     // Gibt die Anzahl der Items zurück.
-    log("0012_shared_preferences_repository - itemCount: $_items");
+    log("0027_shared_preferences_repository - itemCount: $_items");
     return _items.length;
   }
 
@@ -32,7 +32,7 @@ class SharedPreferencesRepository implements DatabaseRepository {
   Future<List<String>> getItems() async {
     // Gibt die Items zurück.
     await Future.delayed(const Duration(milliseconds: 100));
-    log("0020_shared_preferences_repository - getItems: $_items");
+    log("0035_shared_preferences_repository - getItems: $_items");
 
     // Kurz-Version aus der Vorlesung:
     // return await prefs.getStringList("tasks") ?? [];
@@ -47,7 +47,7 @@ class SharedPreferencesRepository implements DatabaseRepository {
     // Fügt ein neues Item hinzu.
     // make sure item doesn't exist yet and is not empty
     if (item.isNotEmpty && !_items.contains(item)) _items.add(item);
-    log("0027_shared_preferences_repository - addItem(String item): $item");
+    log("0050_shared_preferences_repository - addItem(String item): $item");
     await saveItem(item);
   }
 
@@ -70,7 +70,7 @@ class SharedPreferencesRepository implements DatabaseRepository {
     // make sure not empty and not same as other
     if (newItem.isNotEmpty && !_items.contains(newItem)) {
       _items[index] = newItem;
-      log("0051_shared_preferences_repository - _items[index] = newItem = $newItem");
+      log("0073_shared_preferences_repository - _items[index] = newItem = $newItem");
       await saveItem(newItem);
     }
   }

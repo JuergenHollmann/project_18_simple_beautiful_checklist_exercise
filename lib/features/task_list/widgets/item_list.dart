@@ -14,9 +14,13 @@ class ItemList extends StatelessWidget {
   final DatabaseRepository repository;
   final List<String> items;
   final void Function() updateOnChange;
+  
 
   @override
   Widget build(BuildContext context) {
+
+       //AudioPlayer player = AudioPlayer();
+
     return ListView.separated(
       itemCount: items.length,
       itemBuilder: (context, index) {
@@ -29,6 +33,7 @@ class ItemList extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.edit),
                 onPressed: () {
+                  //player.play(AssetSource("sound/sound06pling.wav"));
                   TextEditingController editController =
                       TextEditingController(text: items[index]);
                   /*--------------------------- showDialog ---*/
@@ -37,6 +42,7 @@ class ItemList extends StatelessWidget {
                     builder: (context) {
                       /*--------------------------- AlertDialog ---*/
                       return AlertDialog(
+                        backgroundColor: const Color.fromARGB(255, 6, 0, 193),
                         title: const Text('Aufgabe bearbeiten'),
                         content: TextField(
                           autofocus: true,
@@ -72,9 +78,50 @@ class ItemList extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.delete),
                 onPressed: () {
-                  log("0073 - item_list - LÖSCHEN");
-                  repository.deleteItem(index);
-                  updateOnChange();
+                  /*--------------------------- showDialog ---*/
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      /*--------------------------- AlertDialog ---*/
+                      return AlertDialog(
+                        backgroundColor: const Color.fromARGB(255, 164, 11, 0),
+                        title: const Text('Aufgabe löschen?'),
+                        // content: const TextField(
+                        //   autofocus: true,
+                        //   //controller: editController,
+                        //   decoration:
+                        //       InputDecoration(hintText: "Aufgabe löschen"),
+                        // ),
+                        actions: [
+                          /*--------------------------- abbrechen ---*/
+                          TextButton(
+                            child: const Text('Abbrechen'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          /*--------------------------- löschen ---*/
+                          TextButton(
+                            child: const Text('Löschen'),
+                            onPressed: () {
+                              log("0073 - item_list - LÖSCHEN");
+                              repository.deleteItem(index);
+                              updateOnChange();
+
+                              // repository.editItem(index, editController.text);
+                              // updateOnChange();
+                              Navigator.of(context).pop();
+                            },
+                          )
+                          /*--------------------------- *** ---*/
+                        ],
+                      );
+                    },
+                  );
+
+                  // log("0073 - item_list - LÖSCHEN");
+                  // repository.deleteItem(index);
+                  // updateOnChange();
                 },
               ),
               /*--------------------------- *** ---*/

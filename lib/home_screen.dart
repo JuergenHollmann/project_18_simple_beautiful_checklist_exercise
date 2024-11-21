@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_beautiful_checklist_exercise/features/statistics/screens/statistics_screen.dart';
 import 'package:simple_beautiful_checklist_exercise/shared/database_repository.dart';
@@ -16,37 +17,22 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedNavBarIndex = 0;
   List<Widget> _navBarWidgets = [];
+  AudioPlayer player = AudioPlayer();
 
   @override
   void initState() {
     super.initState();
-    //ListScreen(repository: widget.repository);
-    //loadSavedData();
-
+    /*--------------------------------- Audio ---*/
+    player.play(AssetSource("sound/sound06pling.wav"));
+    /*--------------------------------- *** ---*/
     _navBarWidgets = [
       ListScreen(repository: widget.repository),
       StatisticsScreen(repository: widget.repository),
     ];
   }
 
-//     void loadSavedData() async {
-// SharedPreferencesAsync prefs = SharedPreferencesAsync();
-// String newData = await prefs.getString('tasks') ?? 'No Data';
-// setState(() {
-// //savedData = newData;
-// });
-
   @override
   Widget build(BuildContext context) {
-    // wird hier nicht benötigt, da die _navBarWidgets nicht "empty" sind.
-    // if (_navBarWidgets.isEmpty) {
-    //   return const Scaffold(
-    //     body: Center(
-    //       child: CircularProgressIndicator(),
-    //     ),
-    //   );
-    // }
-
     return Scaffold(
       body: _navBarWidgets[_selectedNavBarIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -63,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: _selectedNavBarIndex,
         selectedItemColor: Colors.deepPurple[200],
         onTap: (int index) {
+          player.play(AssetSource("sound/sound02click.wav"));
           setState(() {
             _selectedNavBarIndex = index;
           });
