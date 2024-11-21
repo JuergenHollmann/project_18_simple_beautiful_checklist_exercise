@@ -20,15 +20,23 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    //loadSavedData();
+
     _navBarWidgets = [
       ListScreen(repository: widget.repository),
       StatisticsScreen(repository: widget.repository),
     ];
   }
 
+//     void loadSavedData() async {
+// SharedPreferencesAsync prefs = SharedPreferencesAsync();
+// String newData = await prefs.getString('tasks') ?? 'No Data';
+// setState(() {
+// //savedData = newData;
+// });
+
   @override
   Widget build(BuildContext context) {
-
     // wird hier nicht benötigt, da die _navBarWidgets nicht "empty" sind.
     // if (_navBarWidgets.isEmpty) {
     //   return const Scaffold(

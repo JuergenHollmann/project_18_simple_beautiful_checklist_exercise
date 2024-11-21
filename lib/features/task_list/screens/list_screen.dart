@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:simple_beautiful_checklist_exercise/features/task_list/widgets/empty_content.dart';
 import 'package:simple_beautiful_checklist_exercise/features/task_list/widgets/item_list.dart';
@@ -24,6 +26,7 @@ class _ListScreenState extends State<ListScreen> {
   void initState() {
     super.initState();
     _updateList();
+    //_saveItem();
   }
 
   void _updateList() async {
@@ -57,12 +60,23 @@ class _ListScreenState extends State<ListScreen> {
                   child: TextField(
                     controller: _controller,
                     decoration: InputDecoration(
-                      labelText: 'Task Hinzufügen',
+                      labelText: 'Task hinzufügen',
                       suffixIcon: IconButton(
+                        // damit wird der Inhalt vom TextField der Liste hinzugefügt:
                         icon: const Icon(Icons.add),
                         onPressed: () {
+                          log("0068_list_screen - hier sollte gespeichert werden");
                           if (_controller.text.isNotEmpty) {
                             widget.repository.addItem(_controller.text);
+
+                            /*----------------------------------------------------------*/
+                            log("0071_list_screen - hier wird leider NICHTS gespeichert");
+
+                            widget.repository.saveItem(_controller.text);
+                            //widget.repository.saveItem(_controller.text);
+                            /*----------------------------------------------------------*/
+
+                            // _saveItem();
                             _controller.clear();
                             _updateList();
                           }
@@ -71,6 +85,7 @@ class _ListScreenState extends State<ListScreen> {
                     ),
                     onSubmitted: (value) {
                       if (value.isNotEmpty) {
+                        // _saveItem(value);
                         widget.repository.addItem(value);
                         _controller.clear();
                         _updateList();

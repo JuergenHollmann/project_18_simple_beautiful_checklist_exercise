@@ -8,6 +8,9 @@ abstract class DatabaseRepository {
   // Fügt ein neues Item hinzu.
   Future<void> addItem(String item);
 
+  // Speichert das Item.
+  Future<void> saveItem(String item);
+
   // Löscht ein Item an einem bestimmten Index.
   Future<void> deleteItem(int index);
 
