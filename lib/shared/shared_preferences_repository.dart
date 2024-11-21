@@ -53,10 +53,15 @@ class SharedPreferencesRepository implements DatabaseRepository {
 
   @override
   Future<void> deleteItem(int index) async {
-    // Löscht ein Item an einem bestimmten Index nach Klick auf die Mülltonne.
-    // todo: AlertDialog einfügen
+    /* TODO: AlertDialog einfügen */
+
+    /* Löscht ein Item an einem bestimmten Index nach Klick auf die Mülltonne. */
     _items.removeAt(index);
-    log("0040_shared_preferences_repository - _items.removeAt(index): $index");
+    log("0060_shared_preferences_repository - $_items gelöscht am Index $index");
+
+    /* den neuen Zustand speichern */
+    prefs.setStringList("tasks", _items);
+    log("0065_shared_preferences_repository - $_items LÖSCHUNG gespeichert");
   }
 
   @override

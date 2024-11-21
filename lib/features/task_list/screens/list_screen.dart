@@ -59,7 +59,7 @@ class _ListScreenState extends State<ListScreen> {
                   child: TextField(
                     controller: _controller,
                     decoration: InputDecoration(
-                      labelText: 'Task hinzufügen',
+                      labelText: 'Aufgabe hinzufügen',
                       suffixIcon: IconButton(
                         // damit wird der Inhalt vom TextField der Liste hinzugefügt:
                         icon: const Icon(Icons.add),
