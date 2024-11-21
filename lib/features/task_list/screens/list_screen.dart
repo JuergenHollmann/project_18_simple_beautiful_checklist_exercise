@@ -26,15 +26,12 @@ class _ListScreenState extends State<ListScreen> {
   void initState() {
     super.initState();
     _updateList();
-    //_saveItem();
   }
 
   void _updateList() async {
     _items.clear();
     _items.addAll(await widget.repository.getItems());
-    // isLoading = false;
-    isLoading = true;
-
+    isLoading = false;
     setState(() {});
   }
 
@@ -67,15 +64,14 @@ class _ListScreenState extends State<ListScreen> {
                         // damit wird der Inhalt vom TextField der Liste hinzugefügt:
                         icon: const Icon(Icons.add),
                         onPressed: () {
-                          log("0068_list_screen - hier sollte gespeichert werden");
                           if (_controller.text.isNotEmpty) {
                             widget.repository.addItem(_controller.text);
-                            log("0071_list_screen - addItem OK");
+                            log("0071_list_screen - addItem ==> OK");
                             /*----------------------------------------------------------*/
-                            widget.repository.saveItem(_controller.text);
+                            // speichert trotzdem es hier auskommentiert ist:
+                            // widget.repository.saveItem(_controller.text);
                             log("0075_list_screen - saveItem");
                             /*----------------------------------------------------------*/
-                            // _saveItem();
                             _controller.clear();
                             _updateList();
                           }
@@ -84,7 +80,6 @@ class _ListScreenState extends State<ListScreen> {
                     ),
                     onSubmitted: (value) {
                       if (value.isNotEmpty) {
-                        // _saveItem(value);
                         widget.repository.addItem(value);
                         _controller.clear();
                         _updateList();

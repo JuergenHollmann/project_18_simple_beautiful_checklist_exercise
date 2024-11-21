@@ -14,6 +14,13 @@
 //   }
 
 //   @override
+//   Future<void> saveItem(String item) async {
+//     // SharedPreferencesAsync = prefs SharedPreferencesAsync(); // funzt nicht - siehe Folie 531-22
+//     // await prefs.setStringList("tasks", _items);
+//     log("0019_shared_preferences_repository - _saveItem = $item");
+//   }
+
+//   @override
 //   Future<List<String>> getItems() async {
 //     // Gibt die Items zurück.
 //     await Future.delayed(const Duration(milliseconds: 100));

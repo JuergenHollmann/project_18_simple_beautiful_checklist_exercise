@@ -15,7 +15,7 @@ class SharedPreferencesRepository implements DatabaseRepository {
 
   @override
   Future<void> saveItem(String item) async {
-    // SharedPreferencesAsync = prefs SharedPreferencesAsync(); // funzt nicht - siehe Folie 531-22
+    // Speichert die Items.
     await prefs.setStringList("tasks", _items);
     log("0019_shared_preferences_repository - _saveItem = $item");
   }
