@@ -5,7 +5,7 @@ import 'package:simple_beautiful_checklist_exercise/shared/database_repository.d
 
 class SharedPreferencesRepository implements DatabaseRepository {
   final SharedPreferencesAsync prefs = SharedPreferencesAsync();
-  final List<String> _items = [];
+  List<String> _items = [];
 
   // @override
   // void initState() {
@@ -35,11 +35,11 @@ class SharedPreferencesRepository implements DatabaseRepository {
     log("0020_shared_preferences_repository - getItems: $_items");
 
     // Kurz-Version aus der Vorlesung:
-    return await prefs.getStringList("tasks") ?? [];
+    // return await prefs.getStringList("tasks") ?? [];
 
     // das ist die längere Version (anstatt der Kurz-Version oben):
-    // _items = await prefs.getStringList("tasks") ?? [];
-    // return _items;
+    _items = await prefs.getStringList("tasks") ?? [];
+    return _items;
   }
 
   @override

@@ -32,7 +32,9 @@ class _ListScreenState extends State<ListScreen> {
   void _updateList() async {
     _items.clear();
     _items.addAll(await widget.repository.getItems());
-    isLoading = false;
+    // isLoading = false;
+    isLoading = true;
+
     setState(() {});
   }
 
@@ -68,14 +70,11 @@ class _ListScreenState extends State<ListScreen> {
                           log("0068_list_screen - hier sollte gespeichert werden");
                           if (_controller.text.isNotEmpty) {
                             widget.repository.addItem(_controller.text);
-
+                            log("0071_list_screen - addItem OK");
                             /*----------------------------------------------------------*/
-                            log("0071_list_screen - hier wird leider NICHTS gespeichert");
-
                             widget.repository.saveItem(_controller.text);
-                            //widget.repository.saveItem(_controller.text);
+                            log("0075_list_screen - saveItem");
                             /*----------------------------------------------------------*/
-
                             // _saveItem();
                             _controller.clear();
                             _updateList();
