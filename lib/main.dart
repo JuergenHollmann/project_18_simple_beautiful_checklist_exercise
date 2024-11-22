@@ -27,11 +27,15 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /*--------------------------------- geändert wegen Bug in iOS ---*/
+    /* MUSS noch im LightMode bei den Schriftfarben angepasst werden */
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.light,
-        textTheme: GoogleFonts.robotoMonoTextTheme(Theme.of(context).textTheme),
+        textTheme: GoogleFonts.robotoMonoTextTheme(
+          ThemeData.light().textTheme,
+        ),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
@@ -39,8 +43,10 @@ class MainApp extends StatelessWidget {
           ThemeData(brightness: Brightness.dark).textTheme,
         ),
       ),
-      //themeMode: ThemeMode.system,
-      themeMode: ThemeMode.dark, // umgestellt auf "dark".
+      /* MUSS noch im LightMode bei den Schriftfarben angepasst werden,
+         deshalb umgestellt von "ThemeMode.system" auf "ThemeMode.dark" */
+      // themeMode: ThemeMode.system, // TODO: Bugfix DarkMode
+      themeMode: ThemeMode.dark,
       title: 'Checklisten App',
       initialRoute: '/',
       routes: {
@@ -50,5 +56,29 @@ class MainApp extends StatelessWidget {
             ),
       },
     );
+    /*--------------------------------- alter Original-Code ---*/
+    // return MaterialApp(
+    //   debugShowCheckedModeBanner: false,
+    //   theme: ThemeData(
+    //     brightness: Brightness.light,
+    //     textTheme: GoogleFonts.robotoMonoTextTheme(Theme.of(context).textTheme),
+    //   ),
+    //   darkTheme: ThemeData(
+    //     brightness: Brightness.dark,
+    //     textTheme: GoogleFonts.robotoMonoTextTheme(
+    //       ThemeData(brightness: Brightness.dark).textTheme,
+    //     ),
+    //   ),
+    //   themeMode: ThemeMode.system,
+    //   title: 'Checklisten App',
+    //   initialRoute: '/',
+    //   routes: {
+    //     '/': (context) => const SplashScreen(),
+    //     '/home': (context) => HomeScreen(
+    //           repository: repository,
+    //         ),
+    //   },
+    // );
+    /*--------------------------------- *** ---*/
   }
 }

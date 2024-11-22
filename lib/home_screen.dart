@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _navBarWidgets = [
       ListScreen(repository: widget.repository),
       StatisticsScreen(repository: widget.repository),
-      // onDarkModeTapped: widget.onDarkModeTapped, //TODO: Bugfix Darkmode
+      // onDarkModeTapped: widget.onDarkModeTapped, //todo: Bugfix Darkmode
     ];
   }
 
