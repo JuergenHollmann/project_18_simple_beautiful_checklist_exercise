@@ -44,7 +44,7 @@ class MainApp extends StatelessWidget {
         ),
       ),
       /* MUSS noch im LightMode bei den Schriftfarben angepasst werden,
-         deshalb umgestellt von "ThemeMode.system" auf "ThemeMode.dark" */
+         deshalb ist noch temporär umgestellt von "ThemeMode.system" auf "ThemeMode.dark" */
       // themeMode: ThemeMode.system, // TODO: Bugfix DarkMode
       themeMode: ThemeMode.dark,
       title: 'Checklisten App',
