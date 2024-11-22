@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_beautiful_checklist_exercise/features/task_list/widgets/empty_content.dart';
 import 'package:simple_beautiful_checklist_exercise/features/task_list/widgets/item_list.dart';
@@ -21,6 +22,7 @@ class _ListScreenState extends State<ListScreen> {
   final List<String> _items = [];
   bool isLoading = true;
   final TextEditingController _controller = TextEditingController();
+  AudioPlayer player = AudioPlayer();
 
   @override
   void initState() {
@@ -45,6 +47,7 @@ class _ListScreenState extends State<ListScreen> {
           ? const Center(child: CircularProgressIndicator())
           : Column(
               children: [
+                const Divider(thickness: 1, color: Colors.white30),
                 Expanded(
                   child: _items.isEmpty
                       ? const EmptyContent()
@@ -54,16 +57,37 @@ class _ListScreenState extends State<ListScreen> {
                           updateOnChange: _updateList,
                         ),
                 ),
+                const Divider(thickness: 1, color: Colors.white30),
                 Padding(
-                  padding: const EdgeInsets.all(40.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: TextField(
+                    style: const TextStyle(
+                      fontSize: 20,
+                    ),
                     controller: _controller,
+                    /*--------------------------- ermöglicht ENTER-Eingaben mit Zeilenvorschub ---*/
+                    textAlignVertical: TextAlignVertical.top,
+                    maxLines:
+                        null, // ermöglicht ENTER-Eingaben mit Zeilenvorschub
+                    /*--------------------------- *** ---*/
                     decoration: InputDecoration(
+                      filled: true,
+                      fillColor: const Color.fromARGB(84, 0, 112, 58),
+                      labelStyle: const TextStyle(
+                        fontSize: 20,
+                      ),
                       labelText: 'Aufgabe hinzufügen',
+                      hintStyle: const TextStyle(
+                        fontSize: 20,
+                      ),
                       suffixIcon: IconButton(
                         // damit wird der Inhalt vom TextField der Liste hinzugefügt:
-                        icon: const Icon(Icons.add),
+                        icon: const Icon(
+                          Icons.add_circle_outline,
+                          size: 40,
+                        ),
                         onPressed: () {
+                          player.play(AssetSource("sound/sound02click.wav"));
                           if (_controller.text.isNotEmpty) {
                             widget.repository.addItem(_controller.text);
                             log("0071_list_screen - addItem ==> OK");
@@ -78,6 +102,7 @@ class _ListScreenState extends State<ListScreen> {
                         },
                       ),
                     ),
+
                     onSubmitted: (value) {
                       if (value.isNotEmpty) {
                         widget.repository.addItem(value);
@@ -87,6 +112,7 @@ class _ListScreenState extends State<ListScreen> {
                     },
                   ),
                 ),
+                const Divider(thickness: 1, color: Colors.white30),
               ],
             ),
     );

@@ -6,7 +6,10 @@ import 'package:simple_beautiful_checklist_exercise/shared/database_repository.d
 import 'features/task_list/screens/list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required this.repository});
+  const HomeScreen({
+    super.key,
+    required this.repository,
+  });
 
   final DatabaseRepository repository;
 

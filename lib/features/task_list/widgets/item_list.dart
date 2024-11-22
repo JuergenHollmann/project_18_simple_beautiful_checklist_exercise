@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_beautiful_checklist_exercise/shared/database_repository.dart';
 
@@ -14,13 +15,9 @@ class ItemList extends StatelessWidget {
   final DatabaseRepository repository;
   final List<String> items;
   final void Function() updateOnChange;
-  
 
   @override
   Widget build(BuildContext context) {
-
-       //AudioPlayer player = AudioPlayer();
-
     return ListView.separated(
       itemCount: items.length,
       itemBuilder: (context, index) {
@@ -33,7 +30,8 @@ class ItemList extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.edit),
                 onPressed: () {
-                  //player.play(AssetSource("sound/sound06pling.wav"));
+                  AudioPlayer player = AudioPlayer();
+                  player.play(AssetSource("sound/sound02click.wav"));
                   TextEditingController editController =
                       TextEditingController(text: items[index]);
                   /*--------------------------- showDialog ---*/
@@ -47,6 +45,10 @@ class ItemList extends StatelessWidget {
                         content: TextField(
                           autofocus: true,
                           controller: editController,
+                          /*--------------------------- ermöglicht ENTER-Eingaben mit Zeilenvorschub ---*/
+                          textAlignVertical: TextAlignVertical.top,
+                          maxLines: null, // ermöglicht ENTER-Eingaben mit Zeilenvorschub
+                          /*--------------------------- *** ---*/
                           decoration: const InputDecoration(
                               hintText: "Aufgabe bearbeiten"),
                         ),
@@ -55,6 +57,9 @@ class ItemList extends StatelessWidget {
                           TextButton(
                             child: const Text('Abbrechen'),
                             onPressed: () {
+                              AudioPlayer player = AudioPlayer();
+                              player
+                                  .play(AssetSource("sound/sound07woosh.wav"));
                               Navigator.of(context).pop();
                             },
                           ),
@@ -62,6 +67,9 @@ class ItemList extends StatelessWidget {
                           TextButton(
                             child: const Text('Speichern'),
                             onPressed: () {
+                              AudioPlayer player = AudioPlayer();
+                              player
+                                  .play(AssetSource("sound/sound06pling.wav"));
                               repository.editItem(index, editController.text);
                               updateOnChange();
                               Navigator.of(context).pop();
@@ -78,25 +86,25 @@ class ItemList extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.delete),
                 onPressed: () {
+                  AudioPlayer player = AudioPlayer();
+                  player.play(AssetSource("sound/sound03enterprise.wav"));
                   /*--------------------------- showDialog ---*/
                   showDialog(
                     context: context,
                     builder: (context) {
                       /*--------------------------- AlertDialog ---*/
                       return AlertDialog(
-                        backgroundColor: const Color.fromARGB(255, 164, 11, 0),
+                        backgroundColor: const Color.fromARGB(
+                            255, 164, 11, 0), // dunkles Rot
                         title: const Text('Aufgabe löschen?'),
-                        // content: const TextField(
-                        //   autofocus: true,
-                        //   //controller: editController,
-                        //   decoration:
-                        //       InputDecoration(hintText: "Aufgabe löschen"),
-                        // ),
                         actions: [
                           /*--------------------------- abbrechen ---*/
                           TextButton(
                             child: const Text('Abbrechen'),
                             onPressed: () {
+                              AudioPlayer player = AudioPlayer();
+                              player
+                                  .play(AssetSource("sound/sound07woosh.wav"));
                               Navigator.of(context).pop();
                             },
                           ),
@@ -104,13 +112,29 @@ class ItemList extends StatelessWidget {
                           TextButton(
                             child: const Text('Löschen'),
                             onPressed: () {
+                              AudioPlayer player = AudioPlayer();
+                              player.play(
+                                  AssetSource("sound/sound05xylophon.wav"));
                               log("0073 - item_list - LÖSCHEN");
                               repository.deleteItem(index);
                               updateOnChange();
-
-                              // repository.editItem(index, editController.text);
-                              // updateOnChange();
                               Navigator.of(context).pop();
+                              /*--------------------------------- Snackbar ---*/
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                backgroundColor: const Color.fromARGB(
+                                    255, 164, 11, 0), // dunkles Rot
+                                duration: const Duration(milliseconds: 3000),
+                                content: Text(
+                                  "Hinweis:\nDie Aufgabe an Position - ${index + 1} - wurde erfolgreich gelöscht! 😉",
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ));
+                              /*--------------------------------- *** ---*/
                             },
                           )
                           /*--------------------------- *** ---*/
@@ -118,10 +142,6 @@ class ItemList extends StatelessWidget {
                       );
                     },
                   );
-
-                  // log("0073 - item_list - LÖSCHEN");
-                  // repository.deleteItem(index);
-                  // updateOnChange();
                 },
               ),
               /*--------------------------- *** ---*/

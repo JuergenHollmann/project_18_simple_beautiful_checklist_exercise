@@ -1,11 +1,13 @@
 import 'dart:developer';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_beautiful_checklist_exercise/shared/database_repository.dart';
 
 class SharedPreferencesRepository implements DatabaseRepository {
   final SharedPreferencesAsync prefs = SharedPreferencesAsync();
   List<String> _items = [];
+  AudioPlayer player = AudioPlayer();
 
   // @override
   // void initState() {
@@ -44,6 +46,7 @@ class SharedPreferencesRepository implements DatabaseRepository {
 
   @override
   Future<void> addItem(String item) async {
+        player.play(AssetSource("sound/sound02click.wav"));
     // Fügt ein neues Item hinzu.
     // make sure item doesn't exist yet and is not empty
     if (item.isNotEmpty && !_items.contains(item)) _items.add(item);
@@ -53,7 +56,7 @@ class SharedPreferencesRepository implements DatabaseRepository {
 
   @override
   Future<void> deleteItem(int index) async {
-    /* TODO: AlertDialog einfügen */
+    player.play(AssetSource("sound/sound02click.wav"));
 
     /* Löscht ein Item an einem bestimmten Index nach Klick auf die Mülltonne. */
     _items.removeAt(index);
@@ -66,6 +69,7 @@ class SharedPreferencesRepository implements DatabaseRepository {
 
   @override
   Future<void> editItem(int index, String newItem) async {
+        player.play(AssetSource("sound/sound02click.wav"));
     // Aktualisiert ein Item an einem bestimmten Index nach Klick auf den Stift und dann auf "Speichern".
     // make sure not empty and not same as other
     if (newItem.isNotEmpty && !_items.contains(newItem)) {

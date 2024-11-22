@@ -32,8 +32,10 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              /*--------------------------------- Shimmer ---*/
               Shimmer.fromColors(
-                period: const Duration(milliseconds: 700), // Dauer der Shimmer-Wiederholung
+                period: const Duration(
+                    milliseconds: 700), // Dauer der Shimmer-Wiederholung
                 baseColor: Colors.white,
                 highlightColor: const Color.fromRGBO(228, 132, 255, 0.724),
                 child: Text(
@@ -47,6 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                 ),
               ),
+              /*--------------------------------- *** ---*/
               const SizedBox(height: 20),
               const Icon(
                 Icons.check_circle_outline,
