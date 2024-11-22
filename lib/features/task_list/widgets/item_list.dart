@@ -22,7 +22,12 @@ class ItemList extends StatelessWidget {
       itemCount: items.length,
       itemBuilder: (context, index) {
         return ListTile(
-          title: Text(items[index]),
+          title: Text(
+            items[index],
+            style: const TextStyle(
+              fontSize: 22, fontWeight: FontWeight.bold,
+            ),
+          ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -47,7 +52,8 @@ class ItemList extends StatelessWidget {
                           controller: editController,
                           /*--------------------------- ermöglicht ENTER-Eingaben mit Zeilenvorschub ---*/
                           textAlignVertical: TextAlignVertical.top,
-                          maxLines: null, // ermöglicht ENTER-Eingaben mit Zeilenvorschub
+                          maxLines:
+                              null, // ermöglicht ENTER-Eingaben mit Zeilenvorschub
                           /*--------------------------- *** ---*/
                           decoration: const InputDecoration(
                               hintText: "Aufgabe bearbeiten"),
