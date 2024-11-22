@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
           padding: const EdgeInsets.all(24.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               /*--------------------------------- Shimmer ---*/
               Shimmer.fromColors(
@@ -39,6 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 baseColor: Colors.white,
                 highlightColor: const Color.fromRGBO(228, 132, 255, 0.724),
                 child: Text(
+                  textAlign: TextAlign.center,
                   'Willkommen zur Checkliste!',
                   style: GoogleFonts.robotoMono(
                     textStyle:
@@ -50,10 +51,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
               /*--------------------------------- *** ---*/
-              const SizedBox(height: 20),
+              const SizedBox(height: 40),
               const Icon(
                 Icons.check_circle_outline,
-                size: 48,
+                size: 150, //48,
               ),
             ],
           ),

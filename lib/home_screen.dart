@@ -9,9 +9,11 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({
     super.key,
     required this.repository,
+    // required this.onDarkModeTapped, //todo: Bugfix Darkmode
   });
 
   final DatabaseRepository repository;
+  // final VoidCallback onDarkModeTapped; //todo: Bugfix Darkmode
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -31,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _navBarWidgets = [
       ListScreen(repository: widget.repository),
       StatisticsScreen(repository: widget.repository),
+      // onDarkModeTapped: widget.onDarkModeTapped, //TODO: Bugfix Darkmode
     ];
   }
 
